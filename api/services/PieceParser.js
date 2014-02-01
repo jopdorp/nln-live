@@ -8,6 +8,7 @@ exports.parseDirectory = function (path) {
     var metadata = JSON.parse(S(fs.readFileSync(path + "/metadata.json", 'utf8')).collapseWhitespace().s);
     Piece.create(
         {
+            title:metadata.title,
             instruments: instruments,
             graph: graph,
             metadata: metadata

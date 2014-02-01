@@ -2,7 +2,7 @@
  * PieceController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description    :: A set of functions called `actions`.
  *
  *                 Actions contain code telling Sails how to respond to a certain type of request.
  *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
@@ -16,20 +16,30 @@
  */
 
 module.exports = {
-    
-  
 
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to PieceController)
-   */
-  _config: {},
 
-  parsedir : function(req,res){
-    res.json(
-        PieceParser.parseDirectory(req.param('path'))
-    );
-  }
-  
+
+    /**
+     * Overrides for the settings in `config/controllers.js`
+     * (specific to PieceController)
+     */
+    _config: {},
+
+    parsedir: function (req, res) {
+        res.json(
+            PieceParser.parseDirectory(req.param('path'))
+        );
+    },
+
+    titles: function (req, res) {
+        Piece.find().exec(function(err, pieces) {
+            var titles = [];
+            for (var i in pieces) {
+                titles.push({title: pieces[i].title, id: pieces[i].id})
+            }
+            res.json(titles);
+        });
+    }
+
 };

@@ -9,7 +9,11 @@
 module.exports = {
 
     attributes: {
-        instruments: {
+        title:{
+            type:'STRING',
+            required:true
+        },
+        instruments:{
             type: 'JSON',
             required: true
         },
@@ -18,7 +22,7 @@ module.exports = {
             required: true
         },
         metadata: {
-            type:"JSON",
+            type:'JSON',
             required: false
         }
     }
