@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script-->
+<script src="/resources/vendor/jquery-1.7.1.min.js"></script>
+<script src="/resources/vendor/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.min.js"></script>
+<script src="/resources/vendor/purl.js"></script>
+<script src="/resources/vendor/underscore.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/resources/vendor/vexxml/vexflow-free.js"></script>
+<script src="/resources/vendor/vexxml/vexflow-musicxml-free.js"></script>
+<script src="/resources/vendor/vexxml/musicxml-viewer.js"></script>
+<script src="/resources/js/connector.js"></script>
+<script src="/resources/js/conductor.js"></script>
+<script src="/resources/js/notesDisplay.js"></script>
+<link href="/resources/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+  <body>
+	  <div class="login-container">
+	  	<form class="login-form">
+	  	Password:
+	  	<input type="password" class="password-input"/>
+	  	<input type="submit" value="continue"/>
+	  	</form>
+	  </div>
+  <div class="conductor content-container">
+    <div data-instrument="conductor" class="vexml_viewer fragment current-fragment"></div>
+    <div data-instrument="conductor" class="vexml_viewer fragment next-fragment"></div>
+  </div>
+  </body>
+</html>

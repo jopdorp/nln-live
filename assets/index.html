@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>nln-score</title>
+	<script src="/resources/vendor/jquery-1.7.1.min.js"></script>
+		<link href="/resources/css/style.css" type="text/css" rel="stylesheet" />
+
+	<style>
+	.menuItem{
+		display:inline-block;
+		vertical-align:top;
+		
+	}
+	.instrument{
+		display:block;
+	}
+	</style>
+<link rel="icon" 
+      type="image/ico" 
+      href="favicon.ico">	
+</head>
+<body>
+	<div class="menuItem">
+		<a href="../nln-live/assets/pages/conductor?page=left&instrument=conductor">conductor left</a><br/>
+		<a href="../nln-live/assets/pages/conductor?page=right&instrument=conductor">conductor right</a>
+	</div>
+	
+	<div class="instruments menuItem">
+		<div class="instrument-title">Instrument:</div>
+	</div>
+	<a href="../nln-live/assets/pages/interpreter" class="menuItem">interpreter</a>
+	<script>
+    $.get("/instruments", function (data) {
+        console.log("received instruments", data);
+		var instrumentList = $(".instruments");
+        $.each(data, function (val, text) {
+			instrumentLink =$("<a/>")
+			.attr("href","pages/instrumentalist?instrument="+val).text(text)
+			.attr("class","instrument");
+			instrumentList.append(instrumentLink);
+        });
+    });
+	</script>
+</body>
+</html>
