@@ -9,6 +9,26 @@
 module.exports = {
 
   attributes: {
+      pieceId:{
+          type:'STRING',
+          required:true
+      },
+      instrument:{
+          type:'STRING',
+          required:true
+      },
+      abc:{
+          type:'STRING',
+          required:false
+      },
+      imagePath:{
+          type:'STRING',
+          required:false
+      },
+      musicXml:{
+          type:'STRING',
+          required:false
+      }
   }
 
 };
