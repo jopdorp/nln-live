@@ -43,34 +43,35 @@ function walkInstruments(path) {
 }
 
 function walkInstrumentDir(path) {
-    var paths = [];
+    var filenames = [];
     walk.walkSync(path, {
         followLinks: false,
         listeners: {
             file: function (root, fileStats, next) {
-                paths.push(root + "/" + fileStats.name);
+                filenames.push(fileStats.name);
                 next();
             }
         }
     });
     var musicalBlocks = [];
-    for (var i in paths) {
+    for (var i in filenames) {
         musicalBlocks.push(
-            getBlockPaths(paths, i, musicalBlocks)
+            getBlockFileNames(path,filenames[i])
         );
     }
     return musicalBlocks;
 }
 
-function getBlockPaths(path) {
+function getBlockFileNames(root,filname) {
     var block = {};
-    if (S(path).endsWith(".png")) {
-        block.imagePath = path;
+    var path= root+"/"+filname;
+    if (S(filname).endsWith(".png")) {
+        block.imageFile = filname;
     }
-    if (S(path).endsWith(".xml")) {
+    if (S(filname).endsWith(".xml")) {
         block.musicXml = fs.readFileSync(path, 'utf8');
     }
-    if (S(path).endsWith(".abc")) {
+    if (S(filname).endsWith(".abc")) {
         block.abc = fs.readFileSync(path, 'utf8');
     }
     return block;

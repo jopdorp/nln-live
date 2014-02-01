@@ -1,60 +1,69 @@
 <html>
 <head>
-	<title>nln-score</title>
-	<script src="js/vendor/jquery-1.7.1.min.js"></script>
-	<link href="styles/style.css" type="text/css" rel="stylesheet" />
+    <title>nln-score</title>
+    <script src="js/vendor/jquery-1.7.1.min.js"></script>
+    <link href="styles/style.css" type="text/css" rel="stylesheet"/>
 
-	<style>
-	.menuItem{
-		display:inline-block;
-		vertical-align:top;
-		
-	}
-	.instrument{
-		display:block;
-	}
-	</style>
-<link rel="icon" 
-      type="image/ico" 
-      href="favicon.ico">	
+    <style>
+        .menuItem {
+            display: inline-block;
+            vertical-align: top;
+
+        }
+
+        .instrument {
+            display: block;
+        }
+    </style>
+    <link rel="icon"
+          type="image/ico"
+          href="favicon.ico">
 </head>
 <body>
-	<div class="menuItem">
-		<a href="../nln-live/assets/pages/conductor?page=left&instrument=conductor">conductor left</a><br/>
-		<a href="../nln-live/assets/pages/conductor?page=right&instrument=conductor">conductor right</a>
-	</div>
-	<select class="piece"></select>
-	<div class="instruments menuItem">
-		<div class="instrument-title">Instrument:</div>
-	</div>
-	<a href="../nln-live/assets/pages/interpreter" class="menuItem">interpreter</a>
-	<script>
-    $(".piece").change(function(){
-            $.get("piece/"+$(this).val(), function (data) {
+<div class="menuItem">
+    <a href="../nln-live/assets/pages/conductor?page=left&instrument=conductor">conductor left</a><br/>
+    <a href="../nln-live/assets/pages/conductor?page=right&instrument=conductor">conductor right</a>
+</div>
+<select class="piece menuItem"></select>
+
+<div class="instruments menuItem">
+    <div class="instrument-title">Instrument:</div>
+</div>
+<a href="../nln-live/assets/pages/interpreter" class="menuItem">interpreter</a>
+<script>
+
+    $(".piece").change(function () {
+        $(".instruments .instrument").remove();
+        var piece = $(this).val();
+        if (piece) {
+            $.get("piece/" + piece, function (data) {
                 console.log("received instruments", data.instruments);
                 var instrumentList = $(".instruments");
                 $.each(data.instruments, function (val, text) {
-                    instrumentLink =$("<a/>")
-                            .attr("href","pages/instrumentalist?instrument="+val).text(text)
-                            .attr("class","instrument");
+                    instrumentLink = $("<a/>")
+                            .attr("href", "pages/instrumentalist.html?instrument=" + val+"&piece="+piece)
+                            .text(text)
+                            .attr("class", "instrument");
                     instrumentList.append(instrumentLink);
+                });
             });
-        });
+        }
     });
+
     $.get("piece/titles", function (data) {
         console.log("received instruments", data);
-		var pieceSelect = $(".piece");
-        var pieceOption =$("<option/>");
-        pieceOption.attr("value","");
+        var pieceSelect = $(".piece");
+        var pieceOption = $("<option/>");
+        pieceOption.attr("value", "");
         pieceOption.html("select");
         pieceSelect.append(pieceOption);
         $.each(data, function () {
-			var pieceOption =$("<option/>");
-            pieceOption.attr("value",this.id);
+            var pieceOption = $("<option/>");
+            pieceOption.attr("value", this.id);
             pieceOption.html(this.title);
-			pieceSelect.append(pieceOption);
+            pieceSelect.append(pieceOption);
         });
     })
-	</script>
+</script>
 </body>
 </html>

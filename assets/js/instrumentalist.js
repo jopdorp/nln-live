@@ -5,8 +5,8 @@ $(document).ready(function () {
 	});
 
     console.log("about to get instruments");
-    $.get("/instruments", function (data) {
-        console.log("received instruments", data);
+    $.get("/piece/"+$.url().param('piece'), function (data) {
+        console.log("received instruments", data.instruments);
 
         var select = $('#instrument-select');
 		
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         $('option', select).remove();
 
-        $.each(data, function (val, text) {
+        $.each(data.instruments, function (val, text) {
             options[options.length] = new Option(text, val);
         });
 		$("#instrument-select").val($.url().param('instrument'));

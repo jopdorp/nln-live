@@ -2,7 +2,7 @@
  * MusicalBlockController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description    :: A set of functions called `actions`.
  *
  *                 Actions contain code telling Sails how to respond to a certain type of request.
  *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
@@ -16,15 +16,24 @@
  */
 
 module.exports = {
-    
-  
 
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to MusicalBlockController)
-   */
-  _config: {}
 
-  
+
+    /**
+     * Overrides for the settings in `config/controllers.js`
+     * (specific to MusicalBlockController)
+     */
+    _config: {},
+
+    allfor: function (req, res) {
+        MusicalBlock.find()
+            .where({
+                pieceId: req.param('piece'),
+                instrument: req.param('instrument')
+            }).exec(function (err, blocks) {
+                res.json(blocks);
+            }
+        );
+    }
 };
