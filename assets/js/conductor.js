@@ -2,8 +2,10 @@ $(document).ready(function(){
     $(".content-container").hide();
     $(".login-form").submit(onLoginSubmit);
 	$('.fragment').click(function(){
-			console.log("about to emitnext-fragment-conducted");
-        	socket.emit('next-fragment-conducted', {});    
+			console.log("about to emit conductNextFragment");
+        $.get('../performance/conductNextFragment',{performanceId:"1"}, function(data,bla){
+
+        });
     });  	
 });
 

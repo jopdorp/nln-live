@@ -20,9 +20,9 @@
           href="favicon.ico">
 </head>
 <body>
-<div class="menuItem">
-    <a href="../nln-live/assets/pages/conductor?page=left&instrument=conductor">conductor left</a><br/>
-    <a href="../nln-live/assets/pages/conductor?page=right&instrument=conductor">conductor right</a>
+<div class="menuItem conductor">
+    <a href="pages/conductor.html?page=left&instrument=conductor">conductor left</a><br/>
+    <a href="pages/conductor.html?page=right&instrument=conductor">conductor right</a>
 </div>
 <select class="piece menuItem"></select>
 
@@ -35,13 +35,19 @@
     $(".piece").change(function () {
         $(".instruments .instrument").remove();
         var piece = $(this).val();
+
+        $(".menuItem.conductor").html(
+                '<a href="pages/conductor.html?page=left&instrument=conductor&piece=' + piece + '">conductor left</a><br/>' +
+                        '<a href="pages/conductor.html?page=right&instrument=conductor&piece=' + piece + '">conductor right</a>'
+        )
+
         if (piece) {
             $.get("piece/" + piece, function (data) {
                 console.log("received instruments", data.instruments);
                 var instrumentList = $(".instruments");
                 $.each(data.instruments, function (val, text) {
                     instrumentLink = $("<a/>")
-                            .attr("href", "pages/instrumentalist.html?instrument=" + val+"&piece="+piece)
+                            .attr("href", "pages/instrumentalist.html?instrument=" + val + "&piece=" + piece)
                             .text(text)
                             .attr("class", "instrument");
                     instrumentList.append(instrumentLink);

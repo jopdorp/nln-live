@@ -15,11 +15,11 @@ var graphPath = __dirname + "/../../assets/pieces/" + config.piece + "/" + "grou
 
 fs.readFile(graphPath, 'utf8', function (err, data) {
     if (err) throw err;
-    setTimeout(function(){
+    setTimeout(function () {
         createSocket(
             HalfVizToJSON.halfVizToGraff(data)
         );
-    },8000);
+    }, 8000);
 });
 
 
@@ -30,16 +30,15 @@ function createSocket(groups) {
 
     console.log("graffObject is ", graffObject)
 
-    module.exports['set-gameplay-state'] = function (data) {
+    exports.setGameplayState = function (data) {
         gameplayState = data.gameplayState;
-    };
-
-    module.exports['next-fragment-conducted'] =  function (req,res) {
+    }
+    exports.conductNextFragment = function (performance) {
         console.log("caught next-fragment-conducted");
 
         var newFragmentObject = conductingUtil.getNextFragment(
-            fragments[1],
-            gameplayState,
+            performance.currentFragments[1],
+            performance.gameplayState,
             currentPath,
             jsonGraph,
             graffObject
@@ -49,12 +48,8 @@ function createSocket(groups) {
         currentPath = newFragmentObject.path;
 
         if (newFragment) {
-            fragments.splice(0, 1);
-            fragments[1] = newFragment;
+            performance.currentFragments.splice(0, 1);
+            performance.currentFragments[1] = newFragment;
         }
-
-        console.log("about to emit play-next-fragment", {piece: config.piece, fragments: fragments, scoreType: config.scoreType});
-        req.socket.broadcast.emit('play-next-fragment', {piece: config.piece, fragments: fragments, scoreType: config.scoreType});
-        req.socket.emit('play-next-fragment', {piece: config.piece, fragments: fragments, scoreType: config.scoreType});
-    };
+    }
 }

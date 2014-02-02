@@ -1,10 +1,20 @@
-socket.on('play-next-fragment', function (data) {
-    console.log("caught play-next-fragment", data);
-    var newFragmentPath = getFragmentPath(data.piece, data.fragments[1], data.scoreType);
-    $('.fragment').toggleClass("current-fragment");
-    changeScore($('.fragment:not(.current-fragment)'), newFragmentPath, data.scoreType);
-});
+socket.on('connect', function socketConnected() {
 
+    console.log("This is from the connect: ", this.socket.sessionid);
+
+    $.get('../performance/subscribe',{performanceId:"1"},function(performance){
+        console.log("performance",performance);
+    });
+
+    socket.on('message', function (message) {
+        console.log("caught message", message);
+        if(message.data.fragments){
+            var newFragmentPath = getFragmentPath(message.data.piece, message.data.fragments[1], message.data.scoreType);
+            $('.fragment').toggleClass("current-fragment");
+            changeScore($('.fragment:not(.current-fragment)'), newFragmentPath, message.data.scoreType);
+        }
+    });
+});
 $(document).ready(function () {
     initializeNotesDisplay($.url().param('instrument'));
     $(window).resize(window.debouncedRefreshScores);
