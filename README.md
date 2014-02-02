@@ -50,7 +50,7 @@ to compile with grunt and run:
 -> sails lift app.js
 
 the server is now running at
-http://localhost:1337
+http://localhost:1337/index.html
 
 To parse a directory with a piece,
 paste the following in the browser after replacing the path parameter with an absolute path:

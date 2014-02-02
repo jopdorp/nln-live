@@ -88,9 +88,8 @@
 
     $(".performance").change(function () {
         $(".instruments .instrument").remove();
-        var piece = $("option[value='" + $(this).val() + "']", this).data("piece");
         var performance = performances[$(this).val()];
-        updateLinks(performance, piece);
+        updateLinks(performance);
         $(".performance-form").deserialize(performance);
 
 
@@ -102,19 +101,20 @@
         $.post('/performance', $(this).serialize(), function (res) {
             console.log("created performance", res);
             addPerformanceOption(res);
+            performances[res.id] = res;
             $('.performance').val(res.id);
             $('.performance').change();
         });
     });
 
-    function updateLinks(performance, piece) {
-        $(".menuItem.conductor").html(
-                '<a href="pages/conductor.html?page=left&instrument=conductor&performance=' + performance.id + '&piece='+performance.piece+'">conductor left</a><br/>' +
-                        '<a href="pages/conductor.html?page=right&instrument=conductor&performance=' + performance.id + '&piece='+performance.piece+'">conductor right</a>'
-        )
-        $(".interpreter-link").attr("href", "pages/interpreter.html?performance=" + performance.id)
-        if (piece) {
-            setInstrumentOptions(piece, performance);
+    function updateLinks(performance) {
+        if (performance) {
+            $(".menuItem.conductor").html(
+                    '<a href="pages/conductor.html?page=left&instrument=conductor&performance=' + performance.id + '&piece=' + performance.piece + '">conductor left</a><br/>' +
+                            '<a href="pages/conductor.html?page=right&instrument=conductor&performance=' + performance.id + '&piece=' + performance.piece + '">conductor right</a>'
+            )
+            $(".interpreter-link").attr("href", "pages/interpreter.html?performance=" + performance.id)
+            setInstrumentOptions(performance);
         } else {
             $('.roleMenu').hide();
             resetForm($('.performance-form'));
@@ -130,8 +130,8 @@
         performanceSelect.append(performanceOption);
     }
 
-    function setInstrumentOptions(piece, performance) {
-        $.get("piece/" + piece, function (data) {
+    function setInstrumentOptions(performance) {
+        $.get("piece/" + performance.piece, function (data) {
             if (data) {
                 $('.roleMenu').show();
                 console.log("received instruments", data.instruments);
@@ -139,7 +139,7 @@
                 $.each(data.instruments, function (val, text) {
                     instrumentLink = $("<a/>")
                             .attr("href", "pages/instrumentalist.html?instrument=" + val +
-                                    "&piece="+performance.piece+
+                                    "&piece=" + performance.piece +
                                     "&performance=" + performance.id)
                             .text(text)
                             .attr("class", "instrument");
