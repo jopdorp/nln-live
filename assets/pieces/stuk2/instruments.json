@@ -1,5 +1,5 @@
 {
-    "violin1" : "violin 1",
+    "violin1": "violin 1",
     "violin2": "violin 2",
     "viola": "viola",
     "cello": "cello",
@@ -13,9 +13,9 @@
     "clarinet1": "clarinet 1",
     "clarinet2": "clarinet 2",
     "basclarinet": "bas clarinet",
-	"bassoon1": "bassoon 1",
-	"bassoon2": "bassoon 2",
-	"contrabassoon": "contrabassoon",	
+    "bassoon1": "bassoon 1",
+    "bassoon2": "bassoon 2",
+    "contrabassoon": "contrabassoon",
     "horn1": "horn 1",
     "horn2": "horn 2",
     "horn3": "horn 3",
@@ -30,7 +30,7 @@
     "timpani": "timpani",
     "grancassa": "gran cassa",
     "cymbals": "cymbals",
-    "toms": "toms",    
+    "toms": "toms",
     "harp": "harp",
     "piano": "piano"
 }

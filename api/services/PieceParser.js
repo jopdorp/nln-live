@@ -4,14 +4,18 @@ var walk = require('walk'),
 
 exports.parseDirectory = function (path) {
     var graph = S(fs.readFileSync(path + "/groupsGraph.viz", 'utf8')).collapseWhitespace().s;
-    var instruments = JSON.parse(S(fs.readFileSync(path + "/instruments.json", 'utf8')).collapseWhitespace().s);
+    var instruments = S(fs.readFileSync(path + "/instruments.json", 'utf8')).collapseWhitespace().s;
+    instruments = JSON.parse(instruments);
     var metadata = JSON.parse(S(fs.readFileSync(path + "/metadata.json", 'utf8')).collapseWhitespace().s);
+    var pieceName = path.split("/");
+    pieceName = pieceName[pieceName.length-1];
     Piece.create(
         {
             title:metadata.title,
             instruments: instruments,
             graph: graph,
-            metadata: metadata
+            metadata: metadata,
+            id:pieceName
         }
     ).done(function(err,piece){
             return onPieceCreated(err,piece,path);
@@ -55,26 +59,31 @@ function walkInstrumentDir(path) {
     });
     var musicalBlocks = [];
     for (var i in filenames) {
-        musicalBlocks.push(
-            getBlockFileNames(path,filenames[i])
-        );
+        var filename = filenames[i];
+        var blockName = filename.substring(0, filename.length-4);
+        if(typeof(musicalBlocks[blockName]) == "undefined"){
+            musicalBlocks[blockName] = {
+                blockName : blockName
+            };
+        }
+        var blockContent = getBlockFileNames(path,filename);
+        musicalBlocks[blockName][blockContent.type] = blockContent.value;
     }
     return musicalBlocks;
 }
 
-function getBlockFileNames(root,filname) {
-    var block = {};
-    var path= root+"/"+filname;
-    if (S(filname).endsWith(".png")) {
-        block.imageFile = filname;
+function getBlockFileNames(root,filename) {
+    var path= root+"/"+filename;
+    if (S(filename).endsWith(".png")) {
+        return {type:"imageFile",value:filename};
     }
-    if (S(filname).endsWith(".xml")) {
-        block.musicXml = fs.readFileSync(path, 'utf8');
+    if (S(filename).endsWith(".xml")) {
+        return {type:"musicXml",value:fs.readFileSync(path, 'utf8')};
     }
-    if (S(filname).endsWith(".abc")) {
-        block.abc = fs.readFileSync(path, 'utf8');
+    if (S(filename).endsWith(".abc")) {
+        return{type:"abc",value:fs.readFileSync(path, 'utf8')};
     }
-    return block;
+    return {type:"",value:""};
 }
 
 function onPieceCreated (err, piece,path) {
