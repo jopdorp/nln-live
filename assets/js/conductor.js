@@ -3,12 +3,11 @@ $(document).ready(function(){
     $(".login-form").submit(onLoginSubmit);
 	$('.fragment').click(function(){
 			console.log("about to emit conductNextFragment");
-        $.get('../performance/conductNextFragment',{performanceId:"1"}, function(data,bla){
+        $.get('../performance/conductNextFragment',{performanceId:$.url().param('performance')}, function(data,bla){
 
         });
     });  	
 });
-
 
 function onLoginSubmit(event){
     event.preventDefault();

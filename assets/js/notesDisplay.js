@@ -1,5 +1,6 @@
-socket.get('/performance/subscribe',{performanceId:"1"},function(performance){
+socket.get('/performance/subscribe',{performanceId:$.url().param('performance')},function(performance){
     console.log("performance",performance);
+    window.performance = performance;
 });
 
 socket.on('message', function (message) {
@@ -17,16 +18,16 @@ $(document).ready(function () {
 
 function initializeNotesDisplay(instrument) {
     preloadImages(instrument,function(){
-        $.get("../state/current", function(data) {
+        socket.get("/performance/"+$.url().param('performance'),{}, function(data) {
             window.scoreType = data.scoreType;
             console.log("currentFragments on initialize",data);
             changeScore(
                 $('.fragment:not(.current-fragment)'),
-                getFragmentPath(data.piece,data.fragments[1],data.scoreType)
+                getFragmentPath(data.piece,data.currentFragments[1],data.scoreType)
                 ,data.scoreType);
             changeScore(
                 $('.fragment.current-fragment')
-                ,getFragmentPath(data.piece,data.fragments[0],data.scoreType)
+                ,getFragmentPath(data.piece,data.currentFragments[0],data.scoreType)
                 ,data.scoreType);
         });
     });

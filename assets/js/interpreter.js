@@ -1,38 +1,45 @@
 var groups = 8;
-
-$(document).ready(function(){
-  $(".content-container").hide();
-  $(".login-form").submit(onLoginSubmit);
-  $(".gamevar-slider").change(onSliderChange);
-  createButtons();
+socket.get('/performance/subscribe',{performanceId:$.url().param('performance')},function(performance){
+    console.log("performance",performance);
 });
 
-function onLoginSubmit(event){
+socket.on('message', function (message) {
+    if(message.model == 'performance'){
+        $(".gamevar-slider").val(message.data.gameplayState);
+    }
+});
+
+$(document).ready(function () {
+    $(".content-container").hide();
+    $(".login-form").submit(onLoginSubmit);
+    $(".gamevar-slider").change(onSliderChange);
+    createButtons();
+});
+
+function onLoginSubmit(event) {
     event.preventDefault();
-	
-	if($(".password-input").val() == "LetMeIn"){
-	    $(".content-container").show();
-		$(".login-container").hide();
-	}else{
-		alert("The password is incorrect.");	
-	}
+
+    if ($(".password-input").val() == "LetMeIn") {
+        $(".content-container").show();
+        $(".login-container").hide();
+    } else {
+        alert("The password is incorrect.");
+    }
 }
 
 function onSliderChange(event) {
-	console.log(event);
-      $(event.currentTarget)
-		console.log("about to emit setgameplaystate: " + event.value);
-        socket.emit('set-gameplay-state', { gameplayState: event.value });    
+    console.log("about to emit setgameplaystate: " + event.value);
+    socket.put('/performance/'+$.url().param('performance'), { gameplayState: event.value }, function (res) {
+        console.log("updatedGamplaytstate: ", res);
+    });
 }
 
-function createButtons()
-{
-	for (var i=0;i<groups;i++)
-	{
-		var button = $("<input/>").attr("type","submit").val("Level "+i).data("value",i);
-		button.click(function(e){
-			$(".gamevar-slider").simpleSlider("setValue", $(e.currentTarget).data("value"))
-		});
-		$(".content-container").append(button);
-	}
+function createButtons() {
+    for (var i = 0; i < groups; i++) {
+        var button = $("<input/>").attr("type", "submit").val("Level " + i).data("value", i);
+        button.click(function (e) {
+            $(".gamevar-slider").simpleSlider("setValue", $(e.currentTarget).data("value"))
+        });
+        $(".content-container").append(button);
+    }
 };

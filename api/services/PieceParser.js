@@ -3,7 +3,7 @@ var walk = require('walk'),
     S = require('string');
 
 exports.parseDirectory = function (path) {
-    var graph = S(fs.readFileSync(path + "/groupsGraph.viz", 'utf8')).collapseWhitespace().s;
+    var graph = fs.readFileSync(path + "/groupsGraph.viz", 'utf8');
     var instruments = S(fs.readFileSync(path + "/instruments.json", 'utf8')).collapseWhitespace().s;
     instruments = JSON.parse(instruments);
     var metadata = JSON.parse(S(fs.readFileSync(path + "/metadata.json", 'utf8')).collapseWhitespace().s);
