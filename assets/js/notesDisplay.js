@@ -4,7 +4,7 @@ socket.get('/performance/subscribe',{performanceId:$.url().param('performance')}
 });
 
 socket.on('message', function (message) {
-    if(message.model == 'performance'){
+    if(message.model == 'performance' && message.verb == "conduct"){
         var newFragmentPath = getFragmentPath(message.data.piece, message.data.currentFragments[1], message.data.scoreType);
         $('.fragment').toggleClass("current-fragment");
         changeScore($('.fragment:not(.current-fragment)'), newFragmentPath, message.data.scoreType);

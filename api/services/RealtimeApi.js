@@ -18,13 +18,13 @@ exports.conductNextFragment = function (performance) {
         var newFragmentObject = conductingUtil.getNextFragment(
             performance.currentFragments[1],
             performance.gameplayState,
-            performance.currentPath,
+            performance.path,
             jsonGraph,
             graffObject
         );
 
         var newFragment = newFragmentObject.fragment;
-        performance.currentPath = newFragmentObject.path;
+        performance.path = newFragmentObject.path;
 
         if (newFragment) {
             performance.currentFragments.splice(0, 1);

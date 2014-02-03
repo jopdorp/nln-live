@@ -12,14 +12,11 @@ module.exports = {
 
     conductNextFragment: function (req, res) {
         console.log("request conduct/nextFragment received")
+
         Performance.findOne(req.param('performanceId')).done(function (err, performance) {
             RealtimeApi.conductNextFragment(performance);
             performance.save(function () {
-                Performance.publishUpdate(performance.id, {
-                    currentFragments: performance.currentFragments,
-                    piece: performance.piece,
-                    scoreType: performance.scoreType
-                });
+                Performance.publishConduct(performance);
             });
             res.json(performance);
         });
