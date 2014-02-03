@@ -12,15 +12,35 @@ A system for non linear performances with live musicians.
 
 Prerequisites:
 
-nodejs, to install with brew:
-brew install node
+brew or apt-get
 
-npm
+first run for brew:
+-> brew update
+-> brew doctor
+
+npm and nodejs, to install with brew:
+-> brew install node
+
+With apt-get:
+-> sudo add-apt-repository ppa:chris-lea/node.js
+-> sudo apt-get update
+-> sudo apt-get install nodejs
+
 
 mongodb, to install with brew:
 brew install mongodb
 
-sailsjs, to install:
+with apt-get:
+-> sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+-> echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+-> sudo apt-get update
+-> sudo apt-get install mongodb-10gen
+
+
+sailsjs, to install on mac:
+npm -g install sails
+
+on ubuntu:
 sudo npm -g install sails
 
 Make sure the following directories are on your path (on macosx):
