@@ -28,8 +28,8 @@ function onLoginSubmit(event) {
 }
 
 function onSliderChange(event) {
-    console.log("about to emit setgameplaystate: " + event.value);
-    socket.put('/performance/'+$.url().param('performance'), { gameplayState: event.value }, function (res) {
+    console.log("about to emit setgameplaystate: " + $(event.currentTarget).val());
+    socket.put('/performance/'+$.url().param('performance'), { gameplayState: $(event.currentTarget).val() }, function (res) {
         console.log("updatedGamplaytstate: ", res);
     });
 }
@@ -38,7 +38,9 @@ function createButtons() {
     for (var i = 0; i < groups; i++) {
         var button = $("<input/>").attr("type", "submit").val("Level " + i).data("value", i);
         button.click(function (e) {
-            $(".gamevar-slider").simpleSlider("setValue", $(e.currentTarget).data("value"))
+         $(".gamevar-slider")
+            .val($(e.currentTarget).data("value"))
+            .change();
         });
         $(".content-container").append(button);
     }
