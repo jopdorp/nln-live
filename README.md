@@ -3,7 +3,7 @@ nln-live
 
 A system for non linear performances with live musicians.
 
-## Prerequisites:
+## Required packages:
 * [Node.js](https://www.google.nl/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CDIQFjAA&url=http%3A%2F%2Fnodejs.org%2F&ei=lvjwUraxBqSw0QW9koHQCw&usg=AFQjCNE4Ts3F1ZWcYkLwsfNqE6RHZgUpyg&bvm=bv.60444564,d.d2k)
 * [npm](https://npmjs.org/)
 * [MongoDB](http://www.mongodb.org/)
@@ -50,7 +50,10 @@ With apt-get:
 
 ### After installing packages
 Make sure the following directories are on your path (on macosx): 
-* -> sudo vi /etc/paths these should be in the file: /usr/local/bin /usr/local/share/npm/bin
+* -> sudo vi /etc/paths 
+The following paths should be in the file:
+* /usr/local/bin 
+* /usr/local/share/npm/bin
 
 Put the nln-live directory in a sensible place. Then execute from the terminal:
 * -> mongod
@@ -61,13 +64,15 @@ Open a new tab in terminal and execute:
 * -> use nln-live
 Ctrl-c to quit the mongo terminal
 
-Browse to the directory where you pyt nln-live and run:
+Browse to the directory where you put nln-live and run:
 * -> npm update
 * -> npm install
 This will download install all the javascript Node.js dependencies
 
 Then to start the server run:
-* -> node app.js to compile with grunt and run: -> sails lift app.js
+* -> node app.js
+To compile with grunt and run:
+* -> sails lift app.js
 
 ## Congratulations!
 **The server is now running at http://localhost:1337/index.html**
