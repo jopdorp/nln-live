@@ -57,6 +57,7 @@ The following paths should be in the file:
 
 Put the nln-live directory in a sensible place. Then execute from the terminal:
 * -> mongod
+
 This started mongodb
 
 Open a new tab in terminal and execute:
@@ -67,6 +68,7 @@ Ctrl-c to quit the mongo terminal
 Browse to the directory where you put nln-live and run:
 * -> npm update
 * -> npm install
+
 This will download install all the javascript Node.js dependencies
 
 Then to start the server run:
