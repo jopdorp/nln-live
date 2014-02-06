@@ -9,14 +9,20 @@
 
 
 (function (io) {
-
   // as soon as this file is loaded, connect automatically, 
-  var socket = io.connect();
+  var socket = io.connect()
+
   if (typeof console !== 'undefined') {
     log('Connecting to Sails.js...');
   }
 
-  socket.on('connect', function socketConnected() {
+  socket.on('connect reconnect', function socketConnected() {
+    // if mobile devices go to sleep (lockscreen) the socket disconnects,
+    // reconnect if this is the case, as nodjes' reconnection is bugged,
+    // use a reload for the moment
+    socket.on('disconnect', function socketDisconnected(){
+      window.location.reload();
+    });
 
     // Listen for Comet messages from Sails
     socket.on('message', function messageReceived(message) {
@@ -60,12 +66,9 @@
       console.log.apply(console, arguments);
     }
   }
-  
 
 })(
-
   // In case you're wrapping socket.io to prevent pollution of the global namespace,
   // you can replace `window.io` with your own `io` here:
   window.io
-
 );
