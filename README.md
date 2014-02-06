@@ -71,6 +71,7 @@ This will download install all the javascript Node.js dependencies
 
 Then to start the server run:
 * -> node app.js
+
 To compile with grunt and run:
 * -> sails lift app.js
 
