@@ -1,74 +1,61 @@
-/**
- * app.js
- *
- * This file contains some conventional defaults for working with Socket.io + Sails.
- * It is designed to get you up and running fast, but is by no means anything special.
- *
- * Feel free to change none, some, or ALL of this file to fit your needs!
- */
-
-
-(function (io) {
-  // as soon as this file is loaded, connect automatically, 
-  var socket = io.connect()
-
-  if (typeof console !== 'undefined') {
-    log('Connecting to Sails.js...');
-  }
-
-  socket.on('connect reconnect', function socketConnected() {
-    // if mobile devices go to sleep (lockscreen) the socket disconnects,
-    // reconnect if this is the case, as nodjes' reconnection is bugged,
-    // use a reload for the moment
-    socket.on('disconnect', function socketDisconnected(){
-      window.location.reload();
-    });
-
-    // Listen for Comet messages from Sails
-    socket.on('message', function messageReceived(message) {
-
-      ///////////////////////////////////////////////////////////
-      // Replace the following with your own custom logic
-      // to run when a new message arrives from the Sails.js
-      // server.
-      ///////////////////////////////////////////////////////////
-      log('New comet message received :: ', message);
-      //////////////////////////////////////////////////////
-
-    });
-
-
-    ///////////////////////////////////////////////////////////
-    // Here's where you'll want to add any custom logic for
-    // when the browser establishes its socket connection to 
-    // the Sails.js server.
-    ///////////////////////////////////////////////////////////
-    log(
-        'Socket is now connected and globally accessible as `socket`.\n' + 
-        'e.g. to send a GET request to Sails, try \n' + 
-        '`socket.get("/", function (response) ' +
-        '{ console.log(response); })`'
-    );
-    ///////////////////////////////////////////////////////////
-
-
-  });
-
-
-  // Expose connected `socket` instance globally so that it's easy
-  // to experiment with from the browser console while prototyping.
-  window.socket = socket;
-
-
-  // Simple log function to keep the example simple
-  function log () {
-    if (typeof console !== 'undefined') {
-      console.log.apply(console, arguments);
+require.config({
+    baseUrl: 'js',
+    paths: {
+        jquery: 'vendor/jquery-1.7.1.min',
+        underscore: 'vendor/underscore',
+        backbone: 'vendor/backbone',
+        handlebars: 'vendor/handlebars-v1.3.0',
+        handleBarsHelpers: 'HandleBarsHelpers',
+        text: 'vendor/text',
+        Router: 'Router',
+        MenuView: 'views/MenuView',
+        PerformanceCollection:'model/PerformanceCollection',
+        PerformanceModel:'model/PerformanceModel',
+        PieceCollection:'model/PieceCollection',
+        PieceModel:'model/PieceModel'
+    },
+    shim: {
+        jquery: {
+            exports: '$'
+        },
+        underscore: {
+            exports: '_'
+        },
+        handlebars: {
+            exports: 'Handlebars',
+            deps: [
+                'text'
+            ]
+        },
+        handleBarsHelpers: {
+            deps: [
+                'handlebars'
+            ]
+        },
+        backbone: {
+            exports: 'Backbone',
+            deps: [
+                'jquery',
+                'underscore',
+                'handleBarsHelpers'
+            ]
+        }
     }
-  }
+});
 
-})(
-  // In case you're wrapping socket.io to prevent pollution of the global namespace,
-  // you can replace `window.io` with your own `io` here:
-  window.io
-);
+require([
+    'Router'
+], function (Router) {
+    var socket = io.connect()
+
+    socket.on('connect reconnect', function () {
+        socket.on('disconnect', function () {
+            window.location.reload(); //TODO implement a more elegant way to reconnect.
+        });
+    });
+
+    window.socket = socket;
+
+    window.router = new Router();
+})();
+

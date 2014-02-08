@@ -1,0 +1,60 @@
+<div class="performanceMenu">
+    <label>Join an existing performance:<br/>
+    <select class="performance menuItem">
+        <option>Select a performance</option>
+        {{#each performances}}
+            <option value="{{id}}" data-piece="{{piece}}">
+                {{id}}
+            </option>
+        {{/each}}
+    </select><br/><br/>
+
+    Or create a new performance:
+    <form class="performance-form">
+        <input type="text" name="id" placeholder="performance id" value="{{selectedPerformance.id}}"/>
+        <select class="piece menuItem" name="piece">
+            <option value="">Select a piece</option>
+            {{#each pieces}}
+                <option value="{{id}}">{{title}}</option>
+            {{/each}}
+        </select>
+        <input type="text" name="gameplayState" placeholder="initial gameplay state (0-7)"
+               value="{{selectedPerformance.gameplayState}}"/>
+        <input type="text" name="currentFragments" placeholder="start fragment 1"
+               value="{{selectedPerformance.currentFragments.[0]}}"/>
+        <input type="text" name="currentFragments" placeholder="start fragment 2"
+               value="{{selectedPerformance.currentFragments.[1]}}"/>
+        <select name="scoreType">
+            <option value="img">Image</option>
+            <option value="abc">ABC Notation</option>
+        </select>
+        <button type="submit">Create</button>
+    </form>
+
+</div>
+
+{{#if selectedPerformance}}
+    <div class="roleMenu">
+        Select your role:<br/>
+
+        <div class="menuItem conductor">
+            <a href="pages/conductor.html?page=left&instrument=conductor&performance={{selectedPerformance.id}}&piece={{selectedPerformance.piece}}">conductor
+                left</a><br/>
+            <a href="pages/conductor.html?page=right&instrument=conductor&performance={{selectedPerformance.id}}&piece={{selectedPerformance.piece}}">conductor
+                right</a><br/>
+        </div>
+        <div class="instruments menuItem">
+            <div class="instrument-title">Instrument:</div>
+    {{#each selectedPiece.instruments}}
+                <a class="instrument"
+                   href="pages/instrumentalist.html?instrument={{@index}}
+               &performance={{selectedPerformance.id}}
+               &piece={{selectedPiece.id}}">
+                    {{this}}
+                </a>
+            {{/each}}
+        </div>
+        <a class="interpreter-link" href="pages/interpreter.html?performance={{selectedPerformance.id}}"
+           class="menuItem">interpreter</a>
+    </div>
+{{/if}}
