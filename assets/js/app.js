@@ -7,12 +7,20 @@ require.config({
         handlebars: 'vendor/handlebars-v1.3.0',
         handleBarsHelpers: 'HandleBarsHelpers',
         text: 'vendor/text',
+
+
         Router: 'Router',
+
+
         MenuView: 'views/MenuView',
-        PerformanceCollection:'model/PerformanceCollection',
-        PerformanceModel:'model/PerformanceModel',
-        PieceCollection:'model/PieceCollection',
-        PieceModel:'model/PieceModel'
+
+        PerformanceCollection: 'model/PerformanceCollection',
+        PerformanceModel: 'model/PerformanceModel',
+        PieceCollection: 'model/PieceCollection',
+        PieceModel: 'model/PieceModel',
+
+        ConductorView: 'views/ConductorView',
+        NotesDisplayView: 'views/NotesDisplayView'
     },
     shim: {
         jquery: {

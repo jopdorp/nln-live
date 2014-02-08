@@ -1,3 +1,4 @@
+
 socket.get('/performance/subscribe',{performanceId:$.url().param('performance')},function(performance){
     console.log("performance",performance);
     window.performance = performance;
