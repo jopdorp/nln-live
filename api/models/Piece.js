@@ -29,6 +29,10 @@ module.exports = {
         metadata: {
             type:'JSON',
             required: false
+        },
+        groups: {
+            type: 'ARRAY',
+            required: true
         }
     }
 

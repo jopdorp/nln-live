@@ -16,15 +16,20 @@
  */
 
 module.exports = {
-
-
-
-
+    
     /**
      * Overrides for the settings in `config/controllers.js`
      * (specific to PieceController)
      */
     _config: {},
+
+    subscribe: function (req, res) {
+        console.log("request piece/subscrive received", req.param('pieceId'))
+        Piece.findOne(req.param('pieceId')).exec(function (err, piece) {
+            Piece.subscribe(req.socket, piece);
+            res.send(piece);
+        });
+    },
 
     parsedir: function (req, res) {
         res.json(

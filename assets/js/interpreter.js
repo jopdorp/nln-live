@@ -1,6 +1,12 @@
-var groups = 8;
-socket.get('/performance/subscribe',{performanceId:$.url().param('performance')},function(performance){
-    console.log("performance",performance);
+var groups;
+socket.get('/performance/subscribe',{performanceId: $.url().param('performance')}, function(performance){
+    console.log("performance", performance);
+
+    socket.get('/piece/subscribe', {pieceId: performance.piece}, function(piece){
+        console.log("piece", piece);
+        groups = piece.groups.length;
+    });
+    
 });
 
 socket.on('message', function (message) {
