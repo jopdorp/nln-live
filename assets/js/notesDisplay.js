@@ -1,35 +1,52 @@
-
-socket.get('/performance/subscribe',{performanceId:$.url().param('performance')},function(performance){
+var socket = io.connect()
+window.socket = socket;
+$.get('/performance/subscribe',{performanceId:$.url().param('performance')},function(performance){
     console.log("performance",performance);
     window.performance = performance;
 });
 
 socket.on('message', function (message) {
     if(message.model == 'performance' && message.verb == "conduct"){
-        var newFragmentPath = getFragmentPath(message.data.piece, message.data.currentFragments[1], message.data.scoreType);
+        var newFragmentPath = getFragmentPath(
+            message.data.piece,
+            message.data.currentFragments[1],
+            message.data.scoreType,
+            $.url().param('instrument')
+        );
         $('.fragment').toggleClass("current-fragment");
         changeScore($('.fragment:not(.current-fragment)'), newFragmentPath, message.data.scoreType);
     }
 });
 
 $(document).ready(function () {
-    initializeNotesDisplay($.url().param('instrument'));
+    initializeNotesDisplay(decodeURIComponent($.url().param('instrument')));
     $(window).resize(window.debouncedRefreshScores);
 });
 
 function initializeNotesDisplay(instrument) {
+
     preloadImages(instrument,function(){
         socket.get("/performance/"+$.url().param('performance'),{}, function(data) {
             window.scoreType = data.scoreType;
             console.log("currentFragments on initialize",data);
             changeScore(
                 $('.fragment:not(.current-fragment)'),
-                getFragmentPath(data.piece,data.currentFragments[1],data.scoreType)
-                ,data.scoreType);
+                getFragmentPath(
+                    data.piece,
+                    data.currentFragments[1],
+                    data.scoreType,
+                    $.url().param('instrument')
+                )
+            );
             changeScore(
                 $('.fragment.current-fragment')
-                ,getFragmentPath(data.piece,data.currentFragments[0],data.scoreType)
-                ,data.scoreType);
+                ,getFragmentPath(
+                    data.piece,
+                    data.currentFragments[0],
+                    data.scoreType,
+                    $.url().param('instrument')
+                )
+            );
         });
     });
 }
@@ -53,16 +70,6 @@ window.debouncedRefreshScores = _.debounce(function () {
     });
 }, 250);
 
-function changeScoreXml(element, scoreXmlPath) {
-    $.get(scoreXmlPath, function (data) {
-        console.log(data);
-        var doc = new Vex.Flow.MusicXML.Document(data);
-        var VexFlow_Viewer = new Vex.Flow.MusicXML.Viewer($(element)[0], doc);
-        $(element).prepend('<div class="vertical-aligner"></div>');
-        return VexFlow_Viewer;
-    });
-}
-
 function changeScoreImg(element, newFragmentPath) {
     console.log("newFragmentPath: " + newFragmentPath);
     if (document.loadedImages) {
@@ -80,10 +87,9 @@ function changeScoreImg(element, newFragmentPath) {
 
 }
 
-function getFragmentPath(piece, fragment, scoreType) {
-    var instrument = "conductor";
-    if ($("#instrument-select").size() > 0) {
-        instrument = $("#instrument-select").val();
+function getFragmentPath(piece, fragment, scoreType,instrument) {
+    if(!instrument){
+        instrument = "conductor";
     }
     var path = "../pieces/" + piece + "/" + instrument + "/" + fragment;
     if(scoreType == "img"){

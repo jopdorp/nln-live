@@ -42,7 +42,7 @@ body {
     transition: all 0.1s ease-in-out;
 }
 
-.current-fragment div, .vexml_viewer.current-fragment {
+.current-fragment, .vexml_viewer.current-fragment {
     -webkit-box-shadow: inset 0px 0px 0px 7px #4B4;
     -moz-box-shadow: inset 0px 0px 0px 7px #4B4;
     -o-box-shadow: inset 0px 0px 0px 7px #4B4;
@@ -63,7 +63,7 @@ body {
     display: inline-block;
 }
 
-.conductor {
+.conductor, .instrumentalist{
     height: 100%;
 }
 

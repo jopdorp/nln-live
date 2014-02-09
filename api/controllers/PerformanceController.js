@@ -3,7 +3,7 @@ module.exports = {
     _config: {},
 
     subscribe: function (req, res) {
-        console.log("request performance/subscrive received", req.param('performanceId'))
+        console.log("request performance/subscribe received", req.param('performanceId'))
         Performance.findOne(req.param('performanceId')).exec(function (err, performance) {
             Performance.subscribe(req.socket, performance);
             res.send(performance);

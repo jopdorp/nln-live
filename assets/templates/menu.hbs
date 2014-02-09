@@ -1,5 +1,5 @@
 <div class="performanceMenu">
-    <label>Join an existing performance:<br/>
+    Join an existing performance:<br/>
     <select class="performance menuItem">
         <option>Select a performance</option>
         {{#each performances}}
@@ -38,23 +38,20 @@
         Select your role:<br/>
 
         <div class="menuItem conductor">
-            <a href="pages/conductor.html?page=left&instrument=conductor&performance={{selectedPerformance.id}}&piece={{selectedPerformance.piece}}">conductor
+            <a href="#conductor/left/{{selectedPerformance.id}}">conductor
                 left</a><br/>
-            <a href="pages/conductor.html?page=right&instrument=conductor&performance={{selectedPerformance.id}}&piece={{selectedPerformance.piece}}">conductor
+            <a href="#conductor/right/{{selectedPerformance.id}}">conductor
                 right</a><br/>
         </div>
         <div class="instruments menuItem">
             <div class="instrument-title">Instrument:</div>
-    {{#each selectedPiece.instruments}}
-                <a class="instrument"
-                   href="pages/instrumentalist.html?instrument={{@index}}
-               &performance={{selectedPerformance.id}}
-               &piece={{selectedPiece.id}}">
+            {{#each selectedPiece.instruments}}
+                <a class="instrument" href="#instrumentalist/{{this}}/{{../selectedPerformance.id}}">
                     {{this}}
                 </a>
             {{/each}}
         </div>
-        <a class="interpreter-link" href="pages/interpreter.html?performance={{selectedPerformance.id}}"
+        <a class="interpreter-link" href="page/interpreter.html?performance={{selectedPerformance.id}}"
            class="menuItem">interpreter</a>
     </div>
 {{/if}}

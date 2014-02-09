@@ -20,6 +20,7 @@ require.config({
         PieceModel: 'model/PieceModel',
 
         ConductorView: 'views/ConductorView',
+        InstrumentalistView: 'views/InstrumentalistView',
         NotesDisplayView: 'views/NotesDisplayView'
     },
     shim: {
@@ -55,15 +56,18 @@ require([
     'Router'
 ], function (Router) {
     var socket = io.connect()
+    window.socket = socket;
 
-    socket.on('connect reconnect', function () {
+    socket.on('connect', function () {
+        if(!window.router){
+            window.router = new Router();
+        }
+
         socket.on('disconnect', function () {
             window.location.reload(); //TODO implement a more elegant way to reconnect.
         });
     });
 
-    window.socket = socket;
 
-    window.router = new Router();
 })();
 
