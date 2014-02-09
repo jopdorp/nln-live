@@ -16,7 +16,7 @@ define([
         },
 
         initialize: function (options) {
-            _.bindAll(this, 'render', 'onInstrumentSelectChange');
+            _.bindAll(this, 'render', 'onInstrumentSelectChange','initializeInstrumentSelect');
             this.options = options;
             this.performance = PerformanceCollection.get(this.options.performanceId)
         },
@@ -26,22 +26,14 @@ define([
             var templateData = {};
             var html = this.template(templateData);
             this.$el.html(html);
-            this.initializeInstrumentSelect()
-            if (!this.notesDisplayView) {
-                this.notesDisplayView = new NotesDisplayView({
-                    performanceId: this.options.performanceId,
-                    parent: this,
-                    instrument: this.options.instrument
-                });
-            }
+            this.initializeInstrumentSelect();
             $("html, body").animate({ scrollTop: $(document).height() });
-
             return this;
         },
 
         onInstrumentSelectChange: function (e) {
             this.notesDisplayView = new NotesDisplayView({
-                performanceId: self.options.performanceId,
+                performanceId: this.options.performanceId,
                 parent: this,
                 instrument: $(e.currentTarget).val()
             });
@@ -65,6 +57,7 @@ define([
                 options[options.length] = new Option(text, val);
             });
             $("#instrument-select", this.$el).val(this.options.instrument);
+            $("#instrument-select", this.$el).change();
         }
 
     });

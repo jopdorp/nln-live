@@ -46,7 +46,7 @@
         <div class="instruments menuItem">
             <div class="instrument-title">Instrument:</div>
             {{#each selectedPiece.instruments}}
-                <a class="instrument" href="#instrumentalist/{{this}}/{{../selectedPerformance.id}}">
+                <a class="instrument" href="#instrumentalist/{{@key}}/{{../selectedPerformance.id}}">
                     {{this}}
                 </a>
             {{/each}}
