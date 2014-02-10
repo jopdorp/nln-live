@@ -1,0 +1,11 @@
+<div class="description">
+    THE SLIDER OR INTERPRETER OF 'THE VARIABLE' OF A PIECE
+</div>
+
+<div class="input">
+    <input class="gamevar-slider" type="range" min="0" max="{{groupsCount}}" step="1">
+</div>
+
+{{#each groups}}
+    <input class="gamevar-button" type="submit" data-value="{{@key}}" value="Level {{this}}"/>
+{{/each}}

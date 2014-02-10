@@ -46,15 +46,11 @@ exports.halfVizToGraff = function (graph) {
         }
     }
 
-	var currentGroup = 0;
 	var edgeIndex = 0;
     for (l in lines) {
         var line = lines[l].replace(/ /g, '');;
         if (line.length == 0) {
-            currentGroup++;
-
-// dit doet nu niks meer? de 'currentgroup' gebaseerd op line break is verwarrend
-			console.log("currentGroup is: " + currentGroup);
+            continue;
         }else{
             line = line.split("->");
 			var groupDistance =  Math.abs(line[0][0] - line[1][0]) * GROUP_DISTANCE_CONST;//maybe exponential is better?

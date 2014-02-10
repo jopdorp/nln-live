@@ -1,8 +1,7 @@
 define([
     'backbone',
-    'handlebars',
-    'text!../templates/notesDisplay.hbs'
-], function (Backbone, Handlebars, notesDisplayTemplate) {
+    'PieceCollection'
+], function (Backbone,PieceCollection) {
     return  Backbone.View.extend({
 
         initialize: function (options) {
@@ -71,7 +70,7 @@ define([
             $(element).css('background-image', 'url(' + newFragmentPath + ')');
         },
 
-        getFragmentPath: function (piece, fragment, scoreType) {
+        getFragmentPath: function (pieceId, fragment, scoreType) {
             var instrument = 'conductor';
             if(this.options.instrument){
                 instrument = this.options.instrument;
@@ -79,7 +78,8 @@ define([
             if ($("#instrument-select",this.options.parent.$el).size() > 0 && $("#instrument-select",this.options.parent.$el).val() != null) {
                 instrument = $("#instrument-select",this.options.parent.$el).val();
             }
-            var path = "pieces/" + piece + "/" + instrument + "/" + fragment;
+            var piece = PieceCollection.get(pieceId);
+            var path = "pieces/" + piece.get('dir') + "/" + instrument + "/" + fragment;
             if (scoreType == "img") {
                 path += ".png"
             }

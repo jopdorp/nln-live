@@ -13,7 +13,7 @@ exports.conductNextFragment = function (performance) {
         var jsonGraph = HalfVizToJSON.halfVizToGraff(piece.graph);
         var graffObject = new graff.Graph({"edges": jsonGraph});
 
-        console.log("caught next-fragment-conducted",jsonGraph);
+        console.log("caught next-fragment-conducted");
 
         var newFragmentObject = conductingUtil.getNextFragment(
             performance.currentFragments[1],

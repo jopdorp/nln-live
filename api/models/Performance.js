@@ -1,10 +1,9 @@
 module.exports = {
 
     attributes: {
-        id: {
+        title : {
             type: 'STRING',
-            required: true,
-            primaryKey: true
+            required: true
         },
         currentFragments: {
             type: 'ARRAY',
@@ -23,7 +22,10 @@ module.exports = {
             defaultsTo: 0,
             required: true
         },
-        path: 'ARRAY'
+        path: {
+            type:'ARRAY',
+            required:false
+        }
     },
 
     publishConduct: function (performance,socketToOmit) {

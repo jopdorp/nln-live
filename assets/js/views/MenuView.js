@@ -56,16 +56,37 @@ define([
         onPieceSelectChange: function (e) {
             if (this.selectedPerformance) {
                 this.selectedPerformance.set('piece', $(e.currentTarget).val());
+                this.render();
             }
-            this.render();
         },
 
         onSubmitPerformance: function (e) {
             e.preventDefault();
-            var performance = new PerformanceModel($(e.currentTarget).serialize());
-            PerformanceCollection.add(performance);
-            performance.save();
-            this.render();
+            var self = this;
+            var performance = new PerformanceModel(this.serializeObject($(e.currentTarget)));
+            performance.save(performance.toJSON(),{success:function(perf){
+                performance.set('id',perf.id);
+                PerformanceCollection.add(performance);
+                self.selectedPerformance = performance;
+                self.render();
+            }});
+
+        },
+
+        serializeObject: function (element) {
+            var o = {};
+            var a = $(element).serializeArray();
+            $.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
         }
 
     });

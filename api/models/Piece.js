@@ -9,11 +9,6 @@
 module.exports = {
 
     attributes: {
-        id: {
-            type: 'STRING',
-            required: true,
-            primaryKey: true
-        },
         title:{
             type:'STRING',
             required:true
@@ -31,7 +26,7 @@ module.exports = {
             required: false
         },
         groups: {
-            type: 'ARRAY',
+            type: 'JSON',
             required: true
         }
     }

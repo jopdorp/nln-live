@@ -1,6 +1,4 @@
-;update graph27-10 16h33
 ;group0
-;infoschermpjeoid,geennoten,alleendathetzoweeropnieuwzoukunnenbeginnen
 0.0->0.0
 0.0->1.2
 1.2->0.0
@@ -137,7 +135,6 @@
 5.25->7.31
 5.44->5.26
 5.44->4.23
-
 5.26->5.27
 5.26->5.28
 5.26->5.29
@@ -159,12 +156,10 @@
 5.29->6.30
 5.29->7.31
 
-;group6-hierinzitalleenvictoryeind
+;group6victory
 6.30->0.0
 
 ;group7losing
 7.31->7.45
-;7.45&6.30zittensameninéénblokje
-;eindvanlosingisaltijdDefeatofVictory
 7.45->0.0
 

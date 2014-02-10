@@ -1,5 +1,5 @@
-define(['backbone','MenuView','ConductorView','InstrumentalistView'],
-    function (Backbone,MenuView,ConductorView,InstrumentalistView) {
+define(['backbone','MenuView','ConductorView','InstrumentalistView','InterpreterView'],
+    function (Backbone,MenuView,ConductorView,InstrumentalistView,InterpreterView) {
         var Router = Backbone.Router.extend({
             initialize:function(){
                 Backbone.history.start();
@@ -11,7 +11,8 @@ define(['backbone','MenuView','ConductorView','InstrumentalistView'],
             routes: {
                 'page/:page': "page",
                 'conductor/:side/:performance': "conductor",
-                'instrumentalist/:instrument/:performance': "instrumentalist"
+                'instrumentalist/:instrument/:performance': "instrumentalist",
+                'interpreter/:performance': "interpreter"
             },
 
             menu: function () {
@@ -31,6 +32,14 @@ define(['backbone','MenuView','ConductorView','InstrumentalistView'],
                 $('body').empty();
                 $('body').append(
                     instrumentalist.render().$el
+                );
+            },
+
+            interpreter:function(performance){
+                var interpreter = new InterpreterView({performanceId:performance})
+                $('body').empty();
+                $('body').append(
+                    interpreter.render().$el
                 );
             },
 

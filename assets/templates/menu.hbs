@@ -4,14 +4,14 @@
         <option>Select a performance</option>
         {{#each performances}}
             <option value="{{id}}" data-piece="{{piece}}">
-                {{id}}
+                {{title}}
             </option>
         {{/each}}
     </select><br/><br/>
 
     Or create a new performance:
     <form class="performance-form">
-        <input type="text" name="id" placeholder="performance id" value="{{selectedPerformance.id}}"/>
+        <input type="text" name="title" placeholder="performance title" value="{{selectedPerformance.title}}"/>
         <select class="piece menuItem" name="piece">
             <option value="">Select a piece</option>
             {{#each pieces}}
@@ -51,7 +51,7 @@
                 </a>
             {{/each}}
         </div>
-        <a class="interpreter-link" href="page/interpreter.html?performance={{selectedPerformance.id}}"
+        <a class="interpreter-link" href="#interpreter/{{selectedPerformance.id}}"
            class="menuItem">interpreter</a>
     </div>
 {{/if}}

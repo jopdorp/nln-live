@@ -5,7 +5,6 @@ require.config({
         underscore: 'vendor/underscore',
         backbone: 'vendor/backbone',
         handlebars: 'vendor/handlebars-v1.3.0',
-        handleBarsHelpers: 'HandleBarsHelpers',
         text: 'vendor/text',
 
 
@@ -21,7 +20,8 @@ require.config({
 
         ConductorView: 'views/ConductorView',
         InstrumentalistView: 'views/InstrumentalistView',
-        NotesDisplayView: 'views/NotesDisplayView'
+        NotesDisplayView: 'views/NotesDisplayView',
+        InterpreterView: 'views/InterpreterView'
     },
     shim: {
         jquery: {
@@ -36,17 +36,12 @@ require.config({
                 'text'
             ]
         },
-        handleBarsHelpers: {
-            deps: [
-                'handlebars'
-            ]
-        },
         backbone: {
             exports: 'Backbone',
             deps: [
                 'jquery',
                 'underscore',
-                'handleBarsHelpers'
+                'handlebars'
             ]
         }
     }

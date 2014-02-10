@@ -1,21 +1,25 @@
 var walk = require('walk'),
     fs = require('fs'),
-    S = require('string');
+    S = require('string'),
+    HalfVizToJSON = require('./HalfVizToJSON');
+
 
 exports.parseDirectory = function (path) {
     var graph = fs.readFileSync(path + "/groupsGraph.viz", 'utf8');
     var instruments = S(fs.readFileSync(path + "/instruments.json", 'utf8')).collapseWhitespace().s;
     instruments = JSON.parse(instruments);
     var metadata = JSON.parse(S(fs.readFileSync(path + "/metadata.json", 'utf8')).collapseWhitespace().s);
-    var pieceName = path.split("/");
-    pieceName = pieceName[pieceName.length-1];
+    var groups = JSON.parse(S(fs.readFileSync(path + "/groups.json", 'utf8')).collapseWhitespace().s);
+    var pieceDir = path.split("/");
+    pieceDir = pieceDir[pieceDir.length-1];
     Piece.create(
         {
             title:metadata.title,
             instruments: instruments,
             graph: graph,
             metadata: metadata,
-            id:pieceName
+            groups:groups,
+            dir:pieceDir
         }
     ).done(function(err,piece){
             return onPieceCreated(err,piece,path);
