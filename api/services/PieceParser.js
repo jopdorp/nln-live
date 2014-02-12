@@ -81,9 +81,6 @@ function getBlockFileNames(root,filename) {
     if (S(filename).endsWith(".png")) {
         return {type:"imageFile",value:filename};
     }
-    if (S(filename).endsWith(".xml")) {
-        return {type:"musicXml",value:fs.readFileSync(path, 'utf8')};
-    }
     if (S(filename).endsWith(".abc")) {
         return{type:"abc",value:fs.readFileSync(path, 'utf8')};
     }
