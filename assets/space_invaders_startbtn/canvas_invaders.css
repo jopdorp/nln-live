@@ -1,0 +1,109 @@
+html, body
+{
+    margin: 0;
+  padding: 0;
+    height: 100%;
+}
+
+body
+{
+    color: #ffffff;
+    background-color: #000;
+	font-family: Impact, courier, Courier New, ;
+    font-size: 12px;
+}
+
+#game_container{
+	top: 268px;
+	left: 97px;
+	position: relative;
+	width: 570px;
+}
+
+#game_bezel{
+	width: 762px;
+	height: 800px;
+	background-image: url('images/canvasinv.png');
+	position: absolute;
+}
+
+#start_button{
+	top: 450px;
+	left: 245px;
+	width: 255px;
+	height: 110px;
+	position: absolute;
+}
+
+#game_bezel_done{
+	display: none;
+	width: 762px;
+	height: 800px;
+	background-image: url('images/canvasinv-defeat.png');
+	position: absolute;
+}
+
+#start_btn{
+	display: center;
+	position: relative;
+	width: 255px;
+	height:110px;
+}
+
+#game_flash{
+	display: none;
+	background-image: url('images/victory_flash.png');
+	top: 295px;
+	left: 97px;
+	position:absolute;
+	height:340px;
+	width:570px;
+}
+
+#invaders-canvas, #background-canvas
+{
+	position: absolute;
+//	left: 0px;
+//	top: 0px;
+}
+
+#background-canvas{
+	/*background: #000; */
+}
+
+#hud{
+	font-size: 1.6em;
+	width: 570px;
+	height: 350px;
+	color: #255db1; 
+	font-weight: bold;
+	position: absolute; 
+//	top: 6px; 
+//	left: 6px;
+}
+
+#gameover{
+	display: none;
+	margin-top: 150px;
+	width: 570px;
+	text-align: center;
+	font-size: 0em;
+}
+
+
+#nextwave{
+	display: none;
+	margin-top: 150px;
+	width: 570px;
+	text-align: center;
+	font-size: 2.2em;
+}
+
+.score,.lives{
+	width: 65%;
+	float: right;
+}
+
+.lives{
+	width: 35%;
+}	
