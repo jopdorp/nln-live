@@ -22,15 +22,26 @@ define([
             });
 
             window.socket.on('message', function (message) {
+                console.log(message);
                 if (message.model == 'performance' && message.verb == "conduct") {
                     var newFragmentPath = self.getFragmentPath(message.data.piece, message.data.currentFragments[1], message.data.scoreType);
                     $('.fragment',self.options.parent.$el).toggleClass("current-fragment");
                     self.changeScore($('.fragment:not(.current-fragment)',self.options.parent.$el), newFragmentPath, message.data.scoreType);
                 }
+
+                if (message.model == 'performance' && message.verb == "fireFragmentForInstrument") {
+                    var newFragmentPath = self.getFragmentPath(message.data.piece, message.data.fragment, message.data.scoreType);
+                    self.changeScore($('.fragment:not(.current-fragment)',self.options.parent.$el), newFragmentPath, message.data.scoreType);
+                }
+
+                if (message.model == 'performance' && message.verb == "playFragmentForInstrument") {
+                    var newFragmentPath = self.getFragmentPath(message.data.piece, message.data.fragment, message.data.scoreType);
+                    $('.fragment',self.options.parent.$el).toggleClass("current-fragment");
+                }
             });
         },
 
-        setInitialScores: function () {
+        setInitialScores: function() {
             var self = this;
             window.socket.get("/performance/" + this.performance.id, {}, function (data) {
                 window.scoreType = data.scoreType;

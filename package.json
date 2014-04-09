@@ -13,8 +13,9 @@
         "walk":"2.3.1",
         "graff":"",
         "underscore":"",
-	"mongodb":"",
-	"sequence":""
+        "node-osc":"",
+	    "mongodb":"",
+	    "sequence":""
     },
     "scripts": {
         "start": "node app.js",

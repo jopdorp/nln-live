@@ -43,6 +43,42 @@ module.exports = {
             },
             id: performance.id
         },socketToOmit);
+    },
+
+    publishFiredFragmentForInstrument: function(performance,fragment,instrument){
+        Performance.publish([
+            {
+                id: performance.id
+            }
+        ], {
+            model: Performance.identity,
+            verb: 'fireFragmentForInstrument',
+            data: {
+                fragment: fragment,
+                piece: performance.piece,
+                scoreType: performance.scoreType,
+                instrument:instrument
+            },
+            id: performance.id
+        });
+    },
+
+    publishPlayedFragmentForInstrument: function(performance,fragment,instrument){
+        Performance.publish([
+            {
+                id: performance.id
+            }
+        ], {
+            model: Performance.identity,
+            verb: 'playFragmentForInstrument',
+            data: {
+                fragment: fragment,
+                piece: performance.piece,
+                scoreType: performance.scoreType,
+                instrument:instrument
+            },
+            id: performance.id
+        });
     }
 
 };
