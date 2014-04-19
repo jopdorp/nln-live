@@ -26,7 +26,7 @@ module.exports = {
 };
 
 var oscServer = new osc.Server(3333, '0.0.0.0');
-var client = new osc.Client('192.168.1.96', 7777);
+var client = new osc.Client('192.168.1.96', 7778);
 
 oscServer.on("message", function (msg, rinfo) {
     console.log("TUIO message:");
@@ -54,9 +54,29 @@ oscServer.on("message", function (msg, rinfo) {
     }
 
     if(msg[0] == "/getPerformances"){
+        console.log("about to find performances");
         Performance.find({}).done(function (err, performances) {
             console.log(performances);
             client.send('/performances', JSON.stringify(performances));
         });
+    }
+
+    if(msg[0] == "/getInstruments"){
+        console.log("about to find performance for instruments");
+        MusicalBlock.find({pieceId:body['pieceId']}).done(function (err, musicalBlocks) {
+            var instruments = {};
+            for(var i in musicalBlocks){
+                var instrument = musicalBlocks[i].instrument;
+                if(instruments[instrument]){
+                    instruments[instrument]++;
+                }else{
+                    instruments[instrument] = 1;
+                }
+            }
+            console.log(instruments);
+            client.send('/instruments', JSON.stringify(instruments));
+        });
+
+
     }
 });

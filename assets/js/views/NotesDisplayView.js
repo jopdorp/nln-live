@@ -32,10 +32,12 @@ define([
                 if (message.model == 'performance' && message.verb == "fireFragmentForInstrument") {
                     var newFragmentPath = self.getFragmentPath(message.data.piece, message.data.fragment, message.data.scoreType);
                     self.changeScore($('.fragment:not(.current-fragment)',self.options.parent.$el), newFragmentPath, message.data.scoreType);
+                    $('.fragment:not(.current-fragment)',self.options.parent.$el).addClass("fired");
                 }
 
                 if (message.model == 'performance' && message.verb == "playFragmentForInstrument") {
                     var newFragmentPath = self.getFragmentPath(message.data.piece, message.data.fragment, message.data.scoreType);
+                    $('.fragment:not(.current-fragment)',self.options.parent.$el).removeClass("fired");
                     $('.fragment',self.options.parent.$el).toggleClass("current-fragment");
                 }
             });

@@ -49,6 +49,13 @@ body {
     box-shadow: inset 0px 0px 2px 5px #4B4;
 }
 
+.fragment.fired{
+    -webkit-box-shadow: inset 0px 0px 0px 7px #777;
+    -moz-box-shadow: inset 0px 0px 0px 7px #777;
+    -o-box-shadow: inset 0px 0px 0px 7px #777;
+    box-shadow: inset 0px 0px 2px 5px #777;
+}
+
 .vertical-aligner {
     height: 100% !important;
     width: 0 !important;
