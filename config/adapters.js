@@ -1,9 +1,9 @@
 module.exports.adapters = {
-    'default': 'mongo',
+    'default': 'disk',
 
     // sails v.0.9.0
     mongo: {
-        module   : 'sails-mongo',
+        module   : 'sails-disk',
         host     : 'localhost',
         port     : 27017,
         user     : '',
@@ -13,6 +13,10 @@ module.exports.adapters = {
         // OR
         module   : 'sails-mongo',
         url      : 'mongodb://localhost'
+    },
+
+    disk: {
+        module : 'sails-disk'
     }
 
 };
