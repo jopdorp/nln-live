@@ -6,14 +6,14 @@
     "dependencies": {
         "sails": "0.9.8",
         "grunt": "0.4.1",
-        "sails-mongo": "0.9.7",
+        "sails-disk": "0.9",
         "ejs": "0.8.4",
         "optimist": "0.3.4",
         "string":"1.8.0",
         "walk":"2.3.1",
         "underscore":"",
-	"mongodb":"",
-	"sequence":""
+        "node-osc":"",
+	    "sequence":""
     },
     "scripts": {
         "start": "node app.js",
