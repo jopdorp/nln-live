@@ -9,6 +9,7 @@ define(['backbone','MenuView','ConductorView','InstrumentalistView','Interpreter
                 menu:new MenuView
             },
             routes: {
+                '':"menu",
                 'page/:page': "page",
                 'conductor/:side/:performance': "conductor",
                 'instrumentalist/:instrument/:performance': "instrumentalist",
@@ -48,6 +49,10 @@ define(['backbone','MenuView','ConductorView','InstrumentalistView','Interpreter
                 $('body').html(
                     this.views[page].render().$el.html()
                 );
+            },
+
+            menu:function(){
+                this.page("menu");
             }
         });
         return Router;
