@@ -13,10 +13,10 @@ exports.createNewPath = function (currentFragment, wishedGroup, jsonGraph, graff
         path = currentFragment;
     } else {
         path = graffObject.get_path(currentFragment, fragmentsInWishedGroup);
+        console.log("Path from current fragment " + currentFragment + "  To next fragment in wished group", path,fragmentsInWishedGroup);
         path.splice(0, 1);
     }
 
-    console.log("Path from current fragment " + currentFragment + "  To next fragment (if breadth first, otherwise path): ", path);
     return path;
 }
 

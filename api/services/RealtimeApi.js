@@ -1,7 +1,7 @@
 var HalfVizToJSON = require('./HalfVizToJSON'),
     config = require('./config.json'),
     _ = require('underscore'),
-    graff = require('graff'),
+    graff = require('./graff'),
     conductingUtil = require('./conductingUtil');
 
 exports.conductNextFragment = function (performance) {
