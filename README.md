@@ -3,6 +3,13 @@ nln-live
 
 A system for non linear performances with live musicians.
 
+# Quickstart
+
+-> sh app.sh
+
+
+
+#To install
 
 ## Required packages:
 * [Node.js](https://www.google.nl/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CDIQFjAA&url=http%3A%2F%2Fnodejs.org%2F&ei=lvjwUraxBqSw0QW9koHQCw&usg=AFQjCNE4Ts3F1ZWcYkLwsfNqE6RHZgUpyg&bvm=bv.60444564,d.d2k)
