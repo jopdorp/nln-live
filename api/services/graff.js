@@ -89,17 +89,23 @@
           }
           return _results;
         }).call(this);
-        x = 0;
+          x = 0;
+        var foundPaths = [];
+
         while (q.length) {
           _ref = _.head(q), cur_v = _ref[0], cur_path = _ref[1];
           q = _.tail(q);
           new_path = cur_path.slice();
           new_path.push(cur_v);
+          if(foundPaths[0] && foundPaths[0].length < new_path.length){
+            return foundPaths[Math.floor(Math.random()*foundPaths.length)];
+          }
+
           if (__indexOf.call(goal,cur_v) !== -1) {
             if (with_dist) {
-              return [new_path, new_path.length];
+              foundPaths.push([new_path, cur_dist]);
             } else {
-              return new_path;
+              foundPaths.push(new_path);
             }
           }
           for (child in this.vertices[cur_v]) {
@@ -121,16 +127,21 @@
         for (child in children) {
           h.push([child, children[child].weight, [start]]);
         }
+
+        var foundPaths = [];
         while (h.size()) {
           _ref2 = h.pop(), cur_v = _ref2[0], cur_dist = _ref2[1], cur_path = _ref2[2];
           visited[cur_v] = 1;
           new_path = cur_path.slice();
           new_path.push(cur_v);
+          if(foundPaths[0] && foundPaths[0].length < new_path.length){
+            return foundPaths[Math.floor(Math.random()*foundPaths.length)];
+          }
           if (__indexOf.call(goal,cur_v) !== -1) {
             if (with_dist) {
-              return [new_path, cur_dist];
+                foundPaths.push([new_path, cur_dist]);
             } else {
-              return new_path;
+                foundPaths.push(new_path);
             }
           }
           children = this.vertices[cur_v];
