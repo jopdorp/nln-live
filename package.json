@@ -13,7 +13,9 @@
         "walk":"2.3.1",
         "underscore":"",
         "node-osc":"",
-	    "sequence":""
+	    "sequence":"",
+        "sails-mongo": "0.9.7",
+        "mongodb":""
     },
     "scripts": {
         "start": "node app.js",
