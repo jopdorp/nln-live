@@ -6,15 +6,22 @@ exports.createNewPath = function (currentFragment, wishedGroup, jsonGraph, graff
     var path = [];
     var currentFragmentIndex = fragmentsInWishedGroup.indexOf(currentFragment);
 
-    if (currentFragmentIndex != -1) {
+    if (currentFragmentIndex != -1 && fragmentsInWishedGroup > 1) {
         fragmentsInWishedGroup.splice(currentFragmentIndex, 1);
     }
-    if (fragmentsInWishedGroup.length == 0) {
+
+    if (!fragmentsInWishedGroup || fragmentsInWishedGroup.length == 0) {
         path = currentFragment;
     } else {
         path = graffObject.get_path(currentFragment, fragmentsInWishedGroup);
-        console.log("Path from current fragment " + currentFragment + "  To next fragment in wished group", path,fragmentsInWishedGroup);
-        path.splice(0, 1);
+        console.log("Path from current fragment " + currentFragment + "  To next fragment in wished group", path);
+
+        if(path == null) {
+            console.log("No path found so selecting random block from destination group");
+            path = [fragmentsInWishedGroup[Math.floor(Math.random()*fragmentsInWishedGroup.length)]];
+        } else {
+            path.splice(0, 1);
+        }
     }
 
     return path;
@@ -33,4 +40,3 @@ function getFragmentsInWishedGroup(jsonGraph, wishedGroup) {
     console.log("fragmentsInWishedGroup " + wishedGroup + " is:", fragmentsInWishedGroup);
     return fragmentsInWishedGroup;
 }
-

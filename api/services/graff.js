@@ -75,10 +75,15 @@
       return this;
     };
     Graph.prototype.get_path = function(start, goal, with_dist) {
+
+      var MAX_ITER = 10000;
+
       var child, children, cur_dist, cur_path, cur_v, h, new_dist, new_path, q, seen, visited, x, _ref, _ref2;
       if (with_dist == null) {
         with_dist = false;
       }
+
+
       if (this.uniform) {
         seen = {};
         q = (function() {
@@ -92,7 +97,7 @@
           x = 0;
         var foundPaths = [];
 
-        while (q.length) {
+        for (var i = 0; i < MAX_ITER && q.length; i++) {
           _ref = _.head(q), cur_v = _ref[0], cur_path = _ref[1];
           q = _.tail(q);
           new_path = cur_path.slice();
@@ -129,7 +134,7 @@
         }
 
         var foundPaths = [];
-        while (h.size()) {
+        for (var i = 0; i < MAX_ITER && h.size();i++) {
           _ref2 = h.pop(), cur_v = _ref2[0], cur_dist = _ref2[1], cur_path = _ref2[2];
           visited[cur_v] = 1;
           new_path = cur_path.slice();
