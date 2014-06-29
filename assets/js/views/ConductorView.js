@@ -32,10 +32,10 @@ define([
             return this;
         },
 
-        onFragmentClick: function () {
+        onFragmentClick: _.debounce(function () {
             console.log("about to emit /performance/conductNextFragment");
             socket.get('/performance/conductNextFragment', {performanceId: this.options.performanceId});
-        }
+        },1000)
 
     });
 });
