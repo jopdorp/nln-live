@@ -7,7 +7,9 @@ define(['backbone', 'handlebars', 'text!./../templates/interpreter.hbs', 'PieceC
 
         events: {
             'change .gamevar-slider': 'onSliderChange',
-            'click  .gamevar-button': 'onButtonClick'
+            'click  .gamevar-button': 'onButtonClick',
+            'click  .pulse-button': 'onPulseClick',
+            'submit	.login-form':'onLoginSubmit'
         },
         initialize: function (options) {
             this.options = options;
@@ -21,7 +23,21 @@ define(['backbone', 'handlebars', 'text!./../templates/interpreter.hbs', 'PieceC
                 }
             });
         },
+		
+		onLoginSubmit: function (event)
+		{
 
+		    event.preventDefault();
+			
+			if($(".password-input").val() == "qwe"){
+			    $(".interpreter-content-container").show();
+				$(".login-container").hide();
+			}else{
+				alert("The password is incorrect.");	
+				 $(".interpreter-content-container").hide();
+			}
+		},
+		
         render: function () {
             var count = 0;
             for(var i in this.groups) {
@@ -37,12 +53,19 @@ define(['backbone', 'handlebars', 'text!./../templates/interpreter.hbs', 'PieceC
         onSliderChange: function (event) {
             console.log("about to emit setgameplaystate: " + $(event.currentTarget).val());
             socket.put('/performance/' + this.options.performanceId, { gameplayState: $(event.currentTarget).val() }, function (res) {
-                console.log("updatedGamplaytstate: ", res);
+                console.log("updatedGameplaystate: ", res);
             });
         },
         onButtonClick: function(event){
             $('.gamevar-slider').val($(event.currentTarget).data("value"));
-            $('.gamevar-slider').change();
+            $('.gamevar-slider').change();         
+        },
+
+		// onPulseClick is an ICMC 2014 addition and enables to request new fragments from the interpreter interface
+        onPulseClick: function(event){
+           console.log("about to emit /performance/conductNextFragment");
+           socket.get('/performance/conductNextFragment', {performanceId: this.options.performanceId});
+            
         }
     });
 });

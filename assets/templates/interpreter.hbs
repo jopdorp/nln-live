@@ -1,11 +1,31 @@
+<div class="login-container">
+	<form class="login-form">
+	Password:
+	<input type="password" class="password-input"/>
+	<input type="submit" value="continue"/>
+	</form>
+</div>
+
+
 <div class="description">
-    THE SLIDER OR INTERPRETER OF 'THE VARIABLE' OF A PIECE
+    THE SLIDER OR INTERPRETER OF 'THE GAMEPLAY VARIABLE' FOR THE INTERACTIVE PIECE
 </div>
 
-<div class="input">
-    <input class="gamevar-slider" type="range" min="0" max="{{groupsCount}}" step="1">
-</div>
+<div class="interpreter-content-container">
 
-{{#each groups}}
-    <input class="gamevar-button" type="submit" data-value="{{@key}}" value="Level {{this}}">
-{{/each}}
+	<div class="input">
+	    <input class="gamevar-slider" type="range" min="0" max="{{groupsCount}}" step="1">
+	</div>
+	
+	<div class="gamevarControls"> 
+	{{#each groups}}
+	    <input class="gamevar-button" type="submit" data-value="{{@key}}" value="Level {{this}}">
+	{{/each}}
+	</div>
+	
+	<div class="pulse">
+		- this pulse is similar to the Conductor pulse and should be used with great caution -
+	    <input class="pulse-button" type="submit" value="(PULSE)">
+	</div>
+
+</div>
