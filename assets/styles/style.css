@@ -1,5 +1,5 @@
 html {
-    height: 100%;
+    height: 98%;
 }
 
 body {
@@ -24,10 +24,11 @@ body {
     overflow: hidden;
     padding: 0;
     margin: 0;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
+//    margin-bottom: 5px;    
+//    -webkit-transition: all 0.3s ease-in-out;
+//    -moz-transition: all 0.3s ease-in-out;
+//    -o-transition: all 0.3s ease-in-out;
+//    transition: all 0.3s ease-in-out;
 
     background-size: contain;
     background-repeat: no-repeat;
@@ -41,17 +42,17 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -o-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
+ //   -webkit-transition: all 0.3s ease-in-out;
+ //   -moz-transition: all 0.3s ease-in-out;
+ //   -o-transition: all 0.3s ease-in-out;
+ //   transition: all 0.3s ease-in-out;
 }
 
 .current-fragment, .vexml_viewer.current-fragment {
-    -webkit-box-shadow: inset 0px 0px 0px 7px #4B4;
-    -moz-box-shadow: inset 0px 0px 0px 7px #4B4;
-    -o-box-shadow: inset 0px 0px 0px 7px #4B4;
-    box-shadow: inset 0px 0px 2px 5px #4B4;
+    -webkit-box-shadow: inset 0px 0px 0px 17px #4B4;
+    -moz-box-shadow: inset 0px 0px 0px 17px #4B4;
+    -o-box-shadow: inset 0px 0px 0px 17px #4B4;
+    box-shadow: inset 0px 0px 2px 17px #4B4;
 }
 
 .vertical-aligner {
