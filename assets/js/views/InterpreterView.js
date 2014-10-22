@@ -51,6 +51,7 @@ define(['backbone', 'handlebars', 'text!./../templates/interpreter.hbs', 'PieceC
         },
 
         onSliderChange: function (event) {
+
             console.log("about to emit setgameplaystate: " + $(event.currentTarget).val());
             socket.put('/performance/' + this.options.performanceId, { gameplayState: $(event.currentTarget).val() }, function (res) {
                 console.log("updatedGameplaystate: ", res);
@@ -61,11 +62,28 @@ define(['backbone', 'handlebars', 'text!./../templates/interpreter.hbs', 'PieceC
             $('.gamevar-slider').change();         
         },
 
-		// onPulseClick is an ICMC 2014 addition and enables to request new fragments from the interpreter interface
+	// onPulseClick is an ICMC 2014 addition and enables to request new fragments from the interpreter interface
         onPulseClick: function(event){
+
+	// autoPilot is a function for Mozart's groups + 1 auto-pilot
+	  		var c=document.getElementById('auto-pilot');
+		  	if (c.checked) {
+    	   	// get the current gameplaystate
+        		var i =(parseInt($('input[name=gamevar-slider]').val()));
+				i = i+1;
+			//temporary hard coded for Mozart demo (future fix is with groups-max)
+				if (i>16)
+				{i=0;}
+	
+    	        $('.gamevar-slider').val(i);
+        	    $('.gamevar-slider').change();  
+			}
+	        else
+        	{
+        	}
            console.log("about to emit /performance/conductNextFragment");
            socket.get('/performance/conductNextFragment', {performanceId: this.options.performanceId});
-            
+
         }
     });
 });
