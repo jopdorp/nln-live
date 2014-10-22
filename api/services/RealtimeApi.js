@@ -11,14 +11,15 @@ exports.conductNextFragment = function (performance) {
 
         console.log("caught next-fragment-conducted");
 
-        if(!performance.path || !performance.path.length){
+//        if(!performance.path || !performance.path.length){
+// this should only be the case if the gameplayVar stays the same, otherwise find a new path too!
             performance.path = conductingUtil.createNewPath(
                 performance.currentFragments[1],
                 performance.gameplayState,
                 jsonGraph,
                 graffObject
             );
-        }
+//        }
 
         performance.currentFragments.splice(0, 1);
         performance.currentFragments[1] = performance.path[0];
